@@ -39,7 +39,7 @@ public class ProdutosDAO {
         stmt.executeUpdate();
 
     } catch (SQLException e) {
-        throw new RuntimeException("Erro ao inserir produto no banco: " + e.getMessage(), e);
+        throw new RuntimeException("Erro ao inserir produto no banco: ");
     }
         
     }
