@@ -15,9 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author Adm
  */
-public class conectaDAO {
-    
-    public Connection connectDB(){
+public class conectaDAO {public Connection connectDB(){
         Connection conn = null;
         
         try {
@@ -37,7 +35,8 @@ public class conectaDAO {
                                         sqle.getMessage() );
         }
     
- }
+    }
+
     
 }
     

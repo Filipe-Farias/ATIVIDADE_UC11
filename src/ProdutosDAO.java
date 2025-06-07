@@ -44,6 +44,21 @@ public class ProdutosDAO {
         
     }
     
+    public void venderProduto(int id) {
+    String sql = "UPDATE produtos SET status = 'Vendido' WHERE id = ?";
+
+    try (Connection conn = new conectaDAO().connectDB();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, id);
+        stmt.executeUpdate();
+
+    } catch (SQLException e) {
+        throw new RuntimeException("Erro ao marcar produto como vendido: " + e.getMessage(), e);
+    }
+}
+
+    
     public ArrayList<ProdutosDTO> listarProdutos(){
         
         return listagem;
