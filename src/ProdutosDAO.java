@@ -8,6 +8,7 @@
  * @author Adm
  */
 
+import java.awt.List;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
@@ -57,6 +58,30 @@ public class ProdutosDAO {
         throw new RuntimeException("Erro ao marcar produto como vendido: " + e.getMessage(), e);
     }
 }
+    
+    public List<ProdutosDTO> listarProdutosVendidos() {
+    List<ProdutosDTO> lista = new ArrayList<>();
+    String sql = "SELECT * FROM produtos WHERE status = 'Vendido'";
+
+    try (Connection conn = new conectaDAO().connectDB();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            ProdutosDTO produto = new ProdutosDTO();
+            produto.setId(rs.getInt("id"));
+            produto.setNome(rs.getString("nome"));
+            produto.setValor(rs.getDouble("valor"));
+            lista.add(produto);
+        }
+
+    } catch (SQLException e) {
+        throw new RuntimeException("Erro ao listar produtos vendidos: " + e.getMessage(), e);
+    }
+
+    return lista;
+}
+
 
     
     public ArrayList<ProdutosDTO> listarProdutos(){
