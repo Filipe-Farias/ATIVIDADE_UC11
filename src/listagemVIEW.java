@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -143,6 +144,22 @@ public class listagemVIEW extends javax.swing.JFrame {
         
         //produtosdao.venderProduto(Integer.parseInt(id));
         listarProdutos();
+        
+        int linha = tabelaProdutos.getSelectedRow();
+
+if (linha >= 0) {
+    int idProduto = (int) tabelaProdutos.getValueAt(linha, 0); // coluna ID
+
+    ProdutosDAO dao = new ProdutosDAO();
+    dao.venderProduto(idProduto);
+
+    JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
+    
+    listarProdutos(); // método que atualiza a tabela
+
+} else {
+    JOptionPane.showMessageDialog(null, "Selecione um produto para vender.");
+}
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
